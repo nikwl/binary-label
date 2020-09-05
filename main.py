@@ -174,15 +174,22 @@ def main(args):
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Binary image labeling.')
+    parser = argparse.ArgumentParser(description='A sumer simple python tool to perform binary image classification using opencv.')
     parser.add_argument('folder', metavar='image folder', type=str, nargs=1,
-                        help='folder that the images live in.')
+                        help='path to highest level folder where images are located. \
+                        Path can be relative to main script or an absolute path. \
+                        Directory will be recursively explored when looking for \
+                        images. ')
     parser.add_argument('--ext', '-e', metavar='extension', type=str, nargs='+', default=['.png'],
-                        help='list of image types to look for.')
+                        help='list of image extensions (file types) to look for. Supports \
+                        those types supported by opencv: (bmp, pbm, pgm, ppm, sr, \
+                        ras, jpeg, jpg, jpe, jp2, tiff, tif, png)')
     parser.add_argument('--label', '-l', metavar='label file', type=str, nargs=1, default='labels.txt',
-                        help='label file to save to.')
+                        help='resulting label file. Will be nested inside the image directory, \
+                        at the highest level.')
     parser.add_argument('--save', '-s', metavar='save frequency', type=int, nargs=1, default=20,
-                        help='how often to save.')
+                        help='how often to save buffered labels. The script will generate a \
+                        temp file to persist labels in the event of a crash.')
     args = parser.parse_args()
 
     main(args)
